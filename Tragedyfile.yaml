@@ -1,0 +1,10 @@
+files:
+  - ".ca"
+  - ".crt"
+  - ".key"
+  - ".pem"
+  - ".p12"
+keywords:
+  - "sensible"
+  - "ultrasensible"
+  - "ultra"
