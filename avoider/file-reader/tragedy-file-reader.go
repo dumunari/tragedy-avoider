@@ -1,4 +1,4 @@
-package main
+package file_reader
 
 import (
 	"fmt"
@@ -9,10 +9,10 @@ import (
 )
 
 const (
-	TragedyfileEnvVar 		= "TRAGEDYFILE"
-	UserHomeEnvVar    		= "HOME"
-	ColorBlue         		= "\033[34m"
-	TragedyfileFilename     = "/Tragedyfile.yaml"
+	tragedyfileEnvVar   = "TRAGEDYFILE"
+	userHomeEnvVar      = "HOME"
+	colorBlue           = "\033[34m"
+	tragedyfileFilename = "/Tragedyfile.yaml"
 )
 
 type Tragedyfile struct {
@@ -20,24 +20,24 @@ type Tragedyfile struct {
 	Keywords []string `yaml:",flow"`
 }
 
-func readTragedyfile() *Tragedyfile{
-	tragedyEnvVar := os.Getenv(TragedyfileEnvVar)
-	userHomeDir := os.Getenv(UserHomeEnvVar)
+func ReadTragedyfile() *Tragedyfile {
+	tragedyEnvVar := os.Getenv(tragedyfileEnvVar)
+	userHomeDir := os.Getenv(userHomeEnvVar)
 	var tragedyFileLocation string
 
 	if tragedyEnvVar != "" {
 		tragedyFileLocation = tragedyEnvVar
 		directoryOrFileExists(tragedyFileLocation)
-		fmt.Println(ColorBlue, "===========================================================================================")
-		fmt.Println(ColorBlue, fmt.Sprintf("|| Using local Tragedyfile: %s", tragedyEnvVar))
-		fmt.Println(ColorBlue, "===========================================================================================")
+		fmt.Println(colorBlue, "===========================================================================================")
+		fmt.Println(colorBlue, fmt.Sprintf("|| Using local Tragedyfile: %s", tragedyEnvVar))
+		fmt.Println(colorBlue, "===========================================================================================")
 		fmt.Println()
 	} else {
-		tragedyFileLocation = userHomeDir + TragedyfileFilename
+		tragedyFileLocation = userHomeDir + tragedyfileFilename
 		directoryOrFileExists(tragedyFileLocation)
-		fmt.Println(ColorBlue, "===========================================================================================")
-		fmt.Println(ColorBlue, fmt.Sprintf("|| Using global Tragedyfile: %s/%s", userHomeDir, "Tragedyfile.yaml"))
-		fmt.Println(ColorBlue, "===========================================================================================")
+		fmt.Println(colorBlue, "===========================================================================================")
+		fmt.Println(colorBlue, fmt.Sprintf("|| Using global Tragedyfile: %s/%s", userHomeDir, "Tragedyfile.yaml"))
+		fmt.Println(colorBlue, "===========================================================================================")
 		fmt.Println()
 	}
 
@@ -53,7 +53,6 @@ func directoryOrFileExists(directoryOrFileName string) {
 }
 
 func (c *Tragedyfile) getConf(tragedyfile string) *Tragedyfile {
-
 	yamlFile, err := ioutil.ReadFile(tragedyfile)
 	if err != nil {
 		log.Fatalf(fmt.Sprintf("Error reading the Tragedyfile: %s ", tragedyfile))
@@ -62,6 +61,5 @@ func (c *Tragedyfile) getConf(tragedyfile string) *Tragedyfile {
 	if err != nil {
 		log.Fatalf(fmt.Sprintf("Tragedyfile.yaml unmarshal error: %v", err))
 	}
-
 	return c
 }

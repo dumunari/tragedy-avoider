@@ -1,4 +1,4 @@
-package main
+package checker
 
 import (
 	"fmt"
@@ -7,14 +7,15 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"tragedy-avoider/avoider/file-reader"
 )
 const (
-	TragedyDirEnvVar = "TRAGEDYDIR"
+	tragedyDirEnvVar = "TRAGEDYDIR"
 )
 
-func executeTragedyChecks(tragedyfile *Tragedyfile) [][]string{
+func ExecuteTragedyChecks(tragedyfile *file_reader.Tragedyfile) [][]string{
 	var tragedies [][]string
-	files := walkThroughDirAndListFiles(os.Getenv(TragedyDirEnvVar))
+	files := walkThroughDirAndListFiles(os.Getenv(tragedyDirEnvVar))
 	tragedies = append(tragedies, examineFilesAndReturnPossibleTragedies(files, tragedyfile.Files))
 	tragedies = append(tragedies, examineKeywordsAndReturnPossibleTragedies(files,tragedyfile.Keywords))
 	return tragedies
