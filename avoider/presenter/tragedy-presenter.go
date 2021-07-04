@@ -9,9 +9,12 @@ const (
  	keywordTragedyKind = "keywords"
 )
 
-func PresentTragedyAvoiderResults(tragedies [][]string){
+var exitCode = 0
+
+func PresentTragedyAvoiderResults(tragedies [][]string) int {
 	presentTragediesCheck(tragedies[0], fileTragedyKind)
 	presentTragediesCheck(tragedies[1], keywordTragedyKind)
+	return exitCode
 }
 
 func presentTragediesCheck(tragedies []string, tragedyKind string) {
@@ -19,6 +22,7 @@ func presentTragediesCheck(tragedies []string, tragedyKind string) {
 		presentSafeFromTragedyResult(tragedyKind)
 	} else {
 		presentTragedyResult(tragedies, tragedyKind)
+		exitCode++
 	}
 }
 

@@ -21,13 +21,14 @@ func ExecuteTragedyChecks(tragedyfile *file_reader.Tragedyfile) [][]string{
 	return tragedies
 }
 
-func walkThroughDirAndListFiles(dirname string) [] string{
+func walkThroughDirAndListFiles(dirname string) []string {
 	var files []string
 	err := filepath.Walk(dirname, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() && !strings.Contains(path, ".git") &&
 			!strings.Contains(path, ".idea") &&
 				!strings.Contains(path, ".jar")  &&
-					!strings.Contains(path, ".class") {
+					!strings.Contains(path, ".sum")  &&
+						!strings.Contains(path, ".class") {
 			files = append(files, path)
 		}
 		return nil

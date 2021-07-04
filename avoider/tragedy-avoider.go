@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"tragedy-avoider/avoider/checker"
 	"tragedy-avoider/avoider/file-reader"
 	"tragedy-avoider/avoider/presenter"
@@ -9,5 +10,5 @@ import (
 func main() {
 	tragedyFileContent := file_reader.ReadTragedyfile()
 	tragedies := checker.ExecuteTragedyChecks(tragedyFileContent)
-	presenter.PresentTragedyAvoiderResults(tragedies)
+	os.Exit(presenter.PresentTragedyAvoiderResults(tragedies))
 }
